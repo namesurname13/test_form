@@ -14,7 +14,7 @@
 .form-input_container__emoji {
   width: 50%;
   min-width: 96px;
-  margin: 7px 0;
+  margin: 10px 0;
 }
 .form-input_emoji {
   padding-left: 12px !important;
@@ -45,7 +45,7 @@
   line-height: 20px;
   white-space: nowrap;
   font-size: 14px;
-  color: #ff0000;
+  color: var(--tg-theme-destructive-text-color);
 }
 .container {
   width: 100%;
