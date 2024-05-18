@@ -1,0 +1,14 @@
+.title_container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.title_big {
+  font-size: 28px;
+  line-height: 44px;
+}
+.title_default {
+  font-size: 20px;
+  line-height: 34px;
+  font-weight: 500;
+}

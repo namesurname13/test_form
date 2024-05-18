@@ -1,0 +1,48 @@
+.form {
+  width: 100%;
+}
+.form-input_title {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+.form-input_container {
+  width: 100%;
+  position: relative;
+  margin: 7px 0;
+}
+.form-input_container__emoji {
+  width: 50%;
+  min-width: 96px;
+  margin: 7px 0;
+}
+.form-input_emoji {
+  padding-left: 12px !important;
+}
+.form-input {
+  width: 100%;
+  padding: 7px;
+  border-radius: 18px;
+  font-size: 16px;
+  background: #fbfbfb;
+  border: 2px solid transparent;
+  height: 36px;
+  padding-left: 12px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error {
+  position: absolute;
+  line-height: 20px;
+  white-space: nowrap;
+  font-size: 14px;
+  color: #ff0000;
+}
+.container {
+  width: 100%;
+}
+.section {
+  padding: 10px 0 20px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
