@@ -7,8 +7,9 @@ import { convertFromRaw } from "draft-js";
 import ActivityForm from "../ActivityForm";
 import ActivityTaskForm from "../ActivityTaskForm";
 import { ActivityFormType, ResultDataType } from "../../utils/types";
-import { FORMAT_OPTIONS, SCHEMA } from "../../utils/constants";
+import { FORMAT_OPTIONS, SCHEMA, TELEGRAM } from "../../utils/constants";
 import "./mainForm.css";
+import { useEffect } from "react";
 
 const MainForm = () => {
   const {
@@ -24,6 +25,7 @@ const MainForm = () => {
     const htmlContent = stateToHTML(contentState, FORMAT_OPTIONS);
     return htmlContent;
   };
+
   const onSubmit = (data: any) => {
     const {
       main_activity_emoji,
@@ -99,6 +101,25 @@ const MainForm = () => {
     };
     console.log(finalData);
   };
+
+  const handledSubmit = () => {
+    handleSubmit(onSubmit)();
+  };
+
+  useEffect(() => {
+    // Инициализация mainButton
+    TELEGRAM.MainButton.setText("Отправить");
+    TELEGRAM.MainButton.show();
+
+    // Обработчик нажатия на mainButton
+    TELEGRAM.onEvent("mainButtonClicked", handledSubmit);
+
+    // Убираем mainButton при размонтировании компонента
+    TELEGRAM.onEvent("mainButtonClicked", handledSubmit);
+    return () => {
+      TELEGRAM.offEvent("mainButtonClicked", handledSubmit);
+    };
+  }, [handledSubmit]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form">
