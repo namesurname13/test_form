@@ -3,7 +3,7 @@ div.DraftEditor-root {
   border-radius: 18px;
   height: 150px;
   width: 100%;
-  background-color: #fff;
+  background: var(--tg-theme-secondary-bg-color, #fbfbfb);
   overflow-x: hidden;
   overflow-y: auto;
 }

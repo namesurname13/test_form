@@ -1,6 +1,6 @@
 .button {
   align-items: center;
-  background-color: #fff;
+  background: var(--tg-theme-button-color);
   border-radius: 18px;
   box-sizing: border-box;
   color: #121212;
