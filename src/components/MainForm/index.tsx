@@ -25,7 +25,20 @@ const MainForm = () => {
     const htmlContent = stateToHTML(contentState, FORMAT_OPTIONS);
     return htmlContent;
   };
-
+  useEffect(() => {
+    const firstErrorKey: string | undefined = Object.keys(errors).find(
+      //@ts-ignore
+      (key): string => errors[key]
+    );
+    if (firstErrorKey) {
+      (
+        document.querySelector(
+          `input[name="${firstErrorKey}"]`
+        ) as HTMLInputElement | null
+      )?.focus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [Object.keys(errors)]);
   const onSubmit = (data: any) => {
     const {
       main_activity_emoji,
