@@ -32,6 +32,9 @@
   justify-content: center;
   align-items: center;
 }
+.form-input::placeholder {
+  color: var(--tg-theme-hint-color, gray);
+}
 .error {
   position: absolute;
   line-height: 20px;
