@@ -13,6 +13,7 @@ div.public-DraftEditor-content {
 }
 .public-DraftEditorPlaceholder-inner {
   color: var(--tg-theme-hint-color, gray);
+  opacity: 1;
 }
 .container {
   display: flex;

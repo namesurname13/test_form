@@ -33,7 +33,7 @@
   align-items: center;
 }
 .form-input::placeholder {
-  color: black;
+  color: var(--tg-theme-hint-color, gray);
   opacity: 1;
 }
 .error {
