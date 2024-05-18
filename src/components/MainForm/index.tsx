@@ -104,14 +104,14 @@ const MainForm = () => {
         message: "Подтверди отправку формы",
         buttons: [
           {
-            id: "cancel",
-            type: "cancel",
-            text: "Отменить",
-          },
-          {
             id: "submit",
             type: "default",
             text: "Подтвердить",
+          },
+          {
+            id: "cancel",
+            type: "cancel",
+            text: "Отменить",
           },
         ],
       },
@@ -121,6 +121,7 @@ const MainForm = () => {
     );
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handledSubmit = () => {
     handleSubmit(onSubmit)();
   };
