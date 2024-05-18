@@ -86,7 +86,6 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
       <Controller
         name={`activity_task_date_niche_${id}`}
         control={control}
-        defaultValue={new Date()}
         render={({ field }) => (
           <div className="form-input_container">
             <DatePicker
