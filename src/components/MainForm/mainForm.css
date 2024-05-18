@@ -33,7 +33,7 @@
   align-items: center;
 }
 .form-input::placeholder {
-  color: var(--tg-theme-hint-color, gray);
+  color: black;
 }
 .error {
   position: absolute;
