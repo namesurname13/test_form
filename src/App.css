@@ -5,24 +5,14 @@
   background: var(--tg-theme-bg-color, #ececec);
 }
 
-@media (prefers-color-scheme: light) {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  p {
-    color: var(--tg-theme-text-color, #000);
-  }
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--tg-theme-section-header-text-color, #000);
 }
 
-@media (prefers-color-scheme: dark) {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  p {
-    color: var(--tg-theme-section-header-text-color, #fff);
-  }
+p {
+  color: var(--tg-theme-text-color, #000);
 }
