@@ -23,11 +23,7 @@ export const SCHEMA = yup.object().shape({
     .string()
     .matches(EMOJI_REGEX, "Только эмоджи")
     .required("Обязательное поле")
-    .test(
-      "max-emoji",
-      "Только 1 эмоджи",
-      (value) => countEmojis(value, EMOJI_REGEX) <= 1
-    ),
+    .test("max-emoji", "Только 1 эмоджи", (value) => countEmojis(value) <= 1),
   main_activity_name: yup.string().required("Обязательное поле"),
   main_activity_description: yup.string().required("Обязательное поле"),
 
