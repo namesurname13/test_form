@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      <p style={{ color: "var(--tg-theme-bg-color)" }}>bg_color</p>
+      {/* <p style={{ color: "var(--tg-theme-bg-color)" }}>bg_color</p>
       <p style={{ color: "var(--tg-theme-text-color)" }}>text_color</p>
       <p style={{ color: "var(--tg-theme-hint-color)" }}>hint_color</p>
       <p style={{ color: "var(--tg-theme-link-color)" }}>link_color</p>
@@ -37,7 +37,7 @@ function App() {
       </p>
       <p style={{ color: "var(--tg-theme-destructive-text-color)" }}>
         destructive_text_color
-      </p>
+      </p> */}
       <Title big title="⚡️ Запуск активности" />
       <MainForm />
     </div>
