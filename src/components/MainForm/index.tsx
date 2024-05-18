@@ -99,7 +99,26 @@ const MainForm = () => {
         },
       ],
     };
-    console.log(finalData);
+    TELEGRAM.showPopup(
+      {
+        message: "Подтверди отправку формы",
+        buttons: [
+          {
+            id: "cancel",
+            type: "cancel",
+            text: "Отменить",
+          },
+          {
+            id: "submit",
+            type: "default",
+            text: "Подтвердить",
+          },
+        ],
+      },
+      (buttonId) => {
+        if (buttonId === "submit") console.log(finalData);
+      }
+    );
   };
 
   const handledSubmit = () => {
