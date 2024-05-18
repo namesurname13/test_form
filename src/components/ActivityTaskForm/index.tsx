@@ -23,7 +23,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
     //@ts-ignore
     ({ value, onClick }, ref) => (
       //@ts-ignore
-      <input
+      <button
         className="form-input"
         onClick={(event) => {
           event.preventDefault();
@@ -34,7 +34,9 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
         //@ts-ignore
         ref={ref}
         value={value}
-      />
+      >
+        {value}
+      </button>
     )
   );
 
