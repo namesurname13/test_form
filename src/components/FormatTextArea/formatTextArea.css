@@ -4,6 +4,7 @@ div.DraftEditor-root {
   height: 150px;
   width: 100%;
   background: var(--tg-theme-secondary-bg-color, #fbfbfb);
+  color: var(--tg-theme-text-color, #000);
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -36,4 +37,12 @@ div.public-DraftEditor-content {
 }
 .tg-spoiler {
   background-color: black;
+}
+.withBorder {
+  border-radius: 18px;
+  border: 2px solid var(--tg-theme-button-color, blue);
+}
+.withoutBorder {
+  border-radius: 18px;
+  border: 2px solid rgba(0, 0, 0, 0);
 }

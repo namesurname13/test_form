@@ -36,6 +36,10 @@
   color: var(--tg-theme-hint-color, gray);
   opacity: 1;
 }
+.form-input:focus {
+  outline: none !important;
+  border: 2px solid var(--tg-theme-button-color, blue);
+}
 .error {
   position: absolute;
   line-height: 20px;

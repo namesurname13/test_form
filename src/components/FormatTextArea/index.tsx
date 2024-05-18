@@ -24,6 +24,7 @@ const FormatTextArea = ({ value, onChange, withItalic = false }: any) => {
       ? EditorState.createWithContent(convertFromRaw(JSON.parse(value)))
       : EditorState.createEmpty()
   );
+  const [focus, setFocus] = useState<boolean>(false);
 
   useEffect(() => {
     const contentState = editorState.getCurrentContent();
@@ -81,13 +82,17 @@ const FormatTextArea = ({ value, onChange, withItalic = false }: any) => {
           />
         </div>
       </div>
-      <Editor
-        editorState={editorState}
-        handleKeyCommand={handleKeyCommand}
-        onChange={setEditorState}
-        placeholder={"Описание"}
-        customStyleMap={styleMap}
-      />
+      <div className={focus ? "withBorder" : "withoutBorder"}>
+        <Editor
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+          editorState={editorState}
+          handleKeyCommand={handleKeyCommand}
+          onChange={setEditorState}
+          placeholder={"Описание"}
+          customStyleMap={styleMap}
+        />
+      </div>
     </div>
   );
 };
