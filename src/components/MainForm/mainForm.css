@@ -24,7 +24,7 @@
   padding: 7px;
   border-radius: 18px;
   font-size: 16px;
-  background: var(--tg-theme-bg-color, #fbfbfb);
+  background: var(--tg-theme-secondary-bg-color, #fbfbfb);
   border: 2px solid transparent;
   height: 36px;
   padding-left: 12px !important;

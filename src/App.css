@@ -2,7 +2,7 @@
   text-align: center;
   width: 100%;
   padding: 10px;
-  background: var(--tg-theme-secondary-bg-color, #ececec);
+  background: var(--tg-theme-bg-color, #ececec);
 }
 h1,
 h2,
