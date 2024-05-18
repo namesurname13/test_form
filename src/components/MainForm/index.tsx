@@ -143,6 +143,7 @@ const MainForm = () => {
         if (buttonId === "submit") console.log(finalData);
       }
     );
+    console.log(finalData);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

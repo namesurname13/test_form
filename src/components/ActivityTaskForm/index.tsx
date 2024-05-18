@@ -5,9 +5,13 @@ import Title from "../Title";
 import FormatTextArea from "../FormatTextArea";
 import { NestedFormPropsType } from "../../utils/types";
 import "./activityTaskForm.css";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { TELEGRAM } from "../../utils/constants";
-
+interface DatepickerCustomInputProps {
+  value: string;
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  isOpen: boolean;
+}
 const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
   control,
   errors,
@@ -19,12 +23,15 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
   const activityTaskDateKey = `activity_task_date_niche_${id}` as const;
   const activityPointsKey = `activity_task_points_amount_niche_${id}` as const;
   //@ts-ignore
-  const DatepickerCustomInput = forwardRef(
+  const DatepickerCustomInput = forwardRef<
+    HTMLButtonElement,
+    DatepickerCustomInputProps
+  >(
     //@ts-ignore
-    ({ value, onClick }, ref) => (
+    ({ value, onClick, isOpen }, ref) => (
       //@ts-ignore
       <button
-        className="form-input"
+        className={`form-input ${isOpen ? "datepicker-open" : ""}`}
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
@@ -33,12 +40,12 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
         }}
         //@ts-ignore
         ref={ref}
-        value={value}
       >
         {value}
       </button>
     )
   );
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
 
   return (
     <div className="container">
@@ -96,7 +103,16 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
               timeFormat="HH:mm"
               timeIntervals={15}
               dateFormat="dd/MM/yyyy HH:mm"
-              customInput={<DatepickerCustomInput />}
+              customInput={
+                <DatepickerCustomInput
+                  isOpen={isDatePickerOpen}
+                  //@ts-ignore
+                  value={field.value}
+                  onClick={field.onChange}
+                />
+              }
+              onCalendarOpen={() => setIsDatePickerOpen(true)}
+              onCalendarClose={() => setIsDatePickerOpen(false)}
             />
             {errors[activityTaskDateKey] ? (
               <p className="error">{errors[activityTaskDateKey]?.message}</p>

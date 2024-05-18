@@ -37,7 +37,7 @@
   color: var(--tg-theme-hint-color, gray);
   opacity: 1;
 }
-.form-input:active {
+.datepicker-open {
   outline: none !important;
   border: 2px solid var(--tg-theme-button-color, blue);
 }
