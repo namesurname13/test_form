@@ -10,6 +10,7 @@ import { ActivityFormType, ResultDataType } from "../../utils/types";
 import { FORMAT_OPTIONS, SCHEMA, TELEGRAM } from "../../utils/constants";
 import "./mainForm.css";
 import { useEffect } from "react";
+import { parseFormattedTextField } from "../../utils/tools";
 
 const MainForm = () => {
   const {
@@ -20,12 +21,8 @@ const MainForm = () => {
   } = useForm<ActivityFormType>({
     resolver: yupResolver(SCHEMA),
   });
-  const parseFormattedTextField = (field: string) => {
-    const rawContent = JSON.parse(field);
-    const contentState = convertFromRaw(rawContent);
-    const htmlContent = stateToHTML(contentState, FORMAT_OPTIONS);
-    return htmlContent;
-  };
+  console.log(errors);
+
   useEffect(() => {
     const firstErrorKey = Object.keys(errors).find(
       (key) => errors[key as keyof FieldErrors<ActivityFormType>]
@@ -225,7 +222,7 @@ const MainForm = () => {
           )}
         />
       </div>
-      <button type="submit">Отправить</button>
+      {/* <button type="submit">Отправить</button> */}
     </form>
   );
 };
