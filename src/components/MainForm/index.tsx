@@ -1,4 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, FieldErrors } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Title from "../Title";
 import NicheForm from "../NicheForm";
@@ -13,6 +13,7 @@ import { useEffect } from "react";
 
 const MainForm = () => {
   const {
+    setFocus,
     handleSubmit,
     control,
     formState: { errors },
@@ -26,10 +27,10 @@ const MainForm = () => {
     return htmlContent;
   };
   useEffect(() => {
-    const firstErrorKey: string | undefined = Object.keys(errors).find(
-      //@ts-ignore
-      (key): string => errors[key]
+    const firstErrorKey = Object.keys(errors).find(
+      (key) => errors[key as keyof FieldErrors<ActivityFormType>]
     );
+
     if (firstErrorKey) {
       (
         document.querySelector(
@@ -37,8 +38,18 @@ const MainForm = () => {
         ) as HTMLInputElement | null
       )?.focus();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Object.keys(errors)]);
+  }, [errors]);
+  type ErrorsType = FieldErrors<ActivityFormType>;
+  useEffect(() => {
+    const firstErrorKey = Object.keys(errors).find(
+      (key) => errors[key as keyof ErrorsType]
+    ) as keyof ActivityFormType | undefined;
+
+    if (firstErrorKey) {
+      setFocus(firstErrorKey);
+    }
+  }, [errors, setFocus]);
+
   const onSubmit = (data: any) => {
     const {
       main_activity_emoji,
