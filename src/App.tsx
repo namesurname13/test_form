@@ -3,9 +3,6 @@ import MainForm from "./components/MainForm";
 import Title from "./components/Title";
 
 function App() {
-  const TELEGRAM = window.Telegram.WebApp;
-  document.body.setAttribute("data-color-scheme", TELEGRAM.colorScheme);
-
   return (
     <div className="App">
       <p style={{ color: "var(--tg-theme-bg-color)" }}>bg_color</p>

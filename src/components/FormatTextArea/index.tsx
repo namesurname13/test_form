@@ -16,6 +16,7 @@ import {
 import "draft-js/dist/Draft.css";
 import FormatButton from "../FormatButton";
 import "./formatTextArea.css";
+import { TELEGRAM } from "../../utils/constants";
 
 const FormatTextArea = ({ value, onChange, withItalic = false }: any) => {
   const [editorState, setEditorState] = useState(
@@ -39,6 +40,7 @@ const FormatTextArea = ({ value, onChange, withItalic = false }: any) => {
   };
 
   const toggleStyle = (style: string) => {
+    TELEGRAM.HapticFeedback.impactOccurred("light");
     setEditorState(RichUtils.toggleInlineStyle(editorState, style));
   };
 

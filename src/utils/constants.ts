@@ -1,6 +1,8 @@
 import * as yup from "yup";
 import { countEmojis } from "./tools";
 
+export const TELEGRAM = window.Telegram.WebApp;
+
 export const FORMAT_OPTIONS = {
   inlineStyles: {
     SPOILER: {
