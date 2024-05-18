@@ -11,6 +11,9 @@ div.DraftEditor-editorContainer,
 div.public-DraftEditor-content {
   height: 100%;
 }
+.public-DraftEditorPlaceholder-inner {
+  color: var(--tg-theme-hint-color, gray);
+}
 .container {
   display: flex;
   flex-direction: column;

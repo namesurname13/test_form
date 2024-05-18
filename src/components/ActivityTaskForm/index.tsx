@@ -6,6 +6,7 @@ import FormatTextArea from "../FormatTextArea";
 import { NestedFormPropsType } from "../../utils/types";
 import "./activityTaskForm.css";
 import { forwardRef } from "react";
+import { TELEGRAM } from "../../utils/constants";
 
 const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
   control,
@@ -27,6 +28,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
+          TELEGRAM.HapticFeedback.impactOccurred("light");
           onClick(event);
         }}
         //@ts-ignore
