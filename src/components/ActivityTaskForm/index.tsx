@@ -11,6 +11,7 @@ interface DatepickerCustomInputProps {
   value: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   isOpen: boolean;
+  customName: string;
 }
 const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
   control,
@@ -28,29 +29,34 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
     DatepickerCustomInputProps
   >(
     //@ts-ignore
-    ({ value, onClick, isOpen }, ref) => (
+    ({ customName, value, onClick, isOpen }, ref) => {
+      console.log(customName);
+
       //@ts-ignore
-      <button
-        className={`form-input ${isOpen ? "datepicker-open" : ""}`}
-        onClick={(event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          TELEGRAM.HapticFeedback.impactOccurred("light");
-          onClick(event);
-        }}
-        //@ts-ignore
-        ref={ref}
-      >
-        {value}
-      </button>
-    )
+      return (
+        <button
+          name={customName}
+          className={`form-input ${isOpen ? "datepicker-open" : ""}`}
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            TELEGRAM.HapticFeedback.impactOccurred("light");
+            onClick(event);
+          }}
+          //@ts-ignore
+          ref={ref}
+        >
+          {value}
+        </button>
+      );
+    }
   );
   const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
 
   return (
     <div className="container">
-      <Title title={`📌 Задание ниши #${id}`} bold />
-      <Title title="📝 Название задания" />
+      <Title title={`📌 Задание ниши #${id}`} bold size="default" />
+      <Title title="📝 Название задания" size="sub" />
       <Controller
         name={`activity_task_name_niche_${id}`}
         control={control}
@@ -71,14 +77,19 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
           </div>
         )}
       />
-      <Title title="📝 Описание задания" />
+      <Title title="📝 Описание задания" size="sub" />
       <Controller
         name={`activity_task_description_niche_${id}`}
         control={control}
         defaultValue=""
         render={({ field }) => (
           <div className="form-input_container">
-            <FormatTextArea value={field.value} onChange={field.onChange} />
+            <FormatTextArea
+              value={field.value}
+              onChange={field.onChange}
+              errors={errors}
+              name={`activity_task_description_niche_${id}`}
+            />
             {errors[activityTaskDescriptionKey] ? (
               <p className="error">
                 {errors[activityTaskDescriptionKey]?.message}
@@ -89,7 +100,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
           </div>
         )}
       />
-      <Title title="📅 Дедлайн задания" />
+      <Title title="📅 Дедлайн задания" size="sub" />
       <Controller
         name={`activity_task_date_niche_${id}`}
         control={control}
@@ -109,6 +120,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
                   //@ts-ignore
                   value={field.value}
                   onClick={field.onChange}
+                  customName={field.name}
                 />
               }
               onCalendarOpen={() => setIsDatePickerOpen(true)}
@@ -122,7 +134,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
           </div>
         )}
       />
-      <Title title="🔰 Количество очков задания" />
+      <Title title="🔰 Количество очков задания" size="sub" />
       <Controller
         name={`activity_task_points_amount_niche_${id}`}
         control={control}
@@ -132,7 +144,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
               className="form-input"
               type="number"
               {...field}
-              placeholder="Количество мест"
+              placeholder="Количество очков"
             />
             {errors[activityPointsKey] ? (
               <p className="error">{errors[activityPointsKey]?.message}</p>

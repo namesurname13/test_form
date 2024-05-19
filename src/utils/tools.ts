@@ -1,6 +1,8 @@
-import { convertFromRaw } from "draft-js";
+import { RawDraftContentState, convertFromRaw } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import { FORMAT_OPTIONS } from "./constants";
+import { ActivityFormType } from "./types";
+import { FieldErrors } from "react-hook-form";
 
 // Функция для подсчета эмоджи в строке
 export const countEmojis = (str: string) => {
@@ -21,4 +23,33 @@ export const parseFormattedTextField = (field: string) => {
   const contentState = convertFromRaw(rawContent);
   const htmlContent = stateToHTML(contentState, FORMAT_OPTIONS);
   return htmlContent;
+};
+export function hasEditorErrors(value: string | undefined): boolean {
+  if (value === undefined || value.trim() === "") {
+    return true;
+  }
+
+  try {
+    const parsedValue = JSON.parse(value) as RawDraftContentState;
+    const text = parsedValue.blocks
+      .map((block) => block.text)
+      .join("")
+      .trim();
+    return text.length > 0;
+  } catch (e) {
+    return false;
+  }
+}
+
+export const handleFocus = (errors: FieldErrors<ActivityFormType>) => {
+  const firstErrorKey = Object.keys(errors)[0] as
+    | keyof ActivityFormType
+    | undefined;
+  if (firstErrorKey) {
+    const element = document.querySelector(
+      `[name="${firstErrorKey}"]`
+    ) as HTMLInputElement | null;
+    element?.focus();
+  }
+  return firstErrorKey;
 };

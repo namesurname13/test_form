@@ -5,7 +5,7 @@ import StrikethroughSVG from "../../assets/icons/StrikeThrough";
 import LetterspacingSVG from "../../assets/icons/Letterspacing";
 import SpoilerSVG from "../../assets/icons/Spoiler";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Editor,
   EditorState,
@@ -17,14 +17,42 @@ import "draft-js/dist/Draft.css";
 import FormatButton from "../FormatButton";
 import "./formatTextArea.css";
 import { TELEGRAM } from "../../utils/constants";
-
-const FormatTextArea = ({ value, onChange, withItalic = false }: any) => {
+import { FieldErrors } from "react-hook-form";
+import { ActivityFormType } from "../../utils/types";
+import { handleFocus } from "../../utils/tools";
+type FormatTextAreaProps = {
+  value: string;
+  onChange: (value: string) => void;
+  withItalic?: boolean;
+  errors: FieldErrors<ActivityFormType>;
+  name: string;
+};
+const FormatTextArea: React.FC<FormatTextAreaProps> = ({
+  value,
+  onChange,
+  withItalic = false,
+  errors,
+  name,
+}: any) => {
   const [editorState, setEditorState] = useState(
     value
       ? EditorState.createWithContent(convertFromRaw(JSON.parse(value)))
       : EditorState.createEmpty()
   );
   const [focus, setFocus] = useState<boolean>(false);
+  const editor = useRef(null);
+
+  function focusEditor() {
+    if (editor.current) {
+      //@ts-ignore
+      editor.current.focus();
+    }
+  }
+
+  useEffect(() => {
+    const element = handleFocus(errors);
+    if (element === name) focusEditor();
+  }, [errors, name]);
 
   useEffect(() => {
     const contentState = editorState.getCurrentContent();
@@ -78,12 +106,16 @@ const FormatTextArea = ({ value, onChange, withItalic = false }: any) => {
           />
           <FormatButton
             icon={<SpoilerSVG />}
-            func={() => toggleStyle("SPOILER")}
+            func={() => {
+              toggleStyle("SPOILER");
+              focusEditor();
+            }}
           />
         </div>
       </div>
       <div className={focus ? "withBorder" : "withoutBorder"}>
         <Editor
+          ref={editor}
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
           editorState={editorState}

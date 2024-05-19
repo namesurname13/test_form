@@ -10,8 +10,8 @@ const NicheForm: React.FC<NestedFormPropsType> = ({ control, errors, id }) => {
 
   return (
     <div className="container">
-      <Title title={`📌 Ниша #${id}`} bold />
-      <Title title="📝 Название ниши" />
+      <Title title={`📌 Ниша #${id}`} bold size="default" />
+      <Title title="📝 Название ниши" size="sub" />
       <Controller
         name={`niche_name_${id}`}
         control={control}
@@ -32,14 +32,19 @@ const NicheForm: React.FC<NestedFormPropsType> = ({ control, errors, id }) => {
           </div>
         )}
       />
-      <Title title="📝 Описание ниши" />
+      <Title title="📝 Описание ниши" size="sub" />
       <Controller
         name={`niche_description_${id}`}
         control={control}
         defaultValue=""
         render={({ field }) => (
           <div className="form-input_container">
-            <FormatTextArea value={field.value} onChange={field.onChange} />
+            <FormatTextArea
+              value={field.value}
+              onChange={field.onChange}
+              errors={errors}
+              name={`niche_description_${id}`}
+            />
             {errors[nicheDescriptionKey] ? (
               <p className="error">{errors[nicheDescriptionKey]?.message}</p>
             ) : (

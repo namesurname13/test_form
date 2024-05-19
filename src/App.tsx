@@ -38,7 +38,7 @@ function App() {
       <p style={{ color: "var(--tg-theme-destructive-text-color)" }}>
         destructive_text_color
       </p> */}
-      <Title big title="⚡️ Запуск активности" />
+      <Title size="big" title="⚡️ Запуск активности" />
       <MainForm />
     </div>
   );

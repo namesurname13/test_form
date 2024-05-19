@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { countEmojis } from "./tools";
+import { countEmojis, hasEditorErrors } from "./tools";
 
 export const TELEGRAM = window.Telegram.WebApp;
 
@@ -25,13 +25,28 @@ export const SCHEMA = yup.object().shape({
     .required("Обязательное поле")
     .test("max-emoji", "Только 1 эмоджи", (value) => countEmojis(value) <= 1),
   main_activity_name: yup.string().required("Обязательное поле"),
-  main_activity_description: yup.string().required("Обязательное поле"),
+  main_activity_description: yup
+    .string()
+    .required("Обязательное поле")
+    .test("is-not-empty", "Обязательное поле", (value) =>
+      hasEditorErrors(value)
+    ),
 
   // Ниша 1
   niche_name_1: yup.string().required("Обязательное поле"),
-  niche_description_1: yup.string().required("Обязательное поле"),
+  niche_description_1: yup
+    .string()
+    .required("Обязательное поле")
+    .test("is-not-empty", "Обязательное поле", (value) =>
+      hasEditorErrors(value)
+    ),
   activity_task_name_niche_1: yup.string().required("Обязательное поле"),
-  activity_task_description_niche_1: yup.string().required("Обязательное поле"),
+  activity_task_description_niche_1: yup
+    .string()
+    .required("Обязательное поле")
+    .test("is-not-empty", "Обязательное поле", (value) =>
+      hasEditorErrors(value)
+    ),
   activity_task_date_niche_1: yup.date().required("Обязательное поле"),
   activity_task_points_amount_niche_1: yup
     .number()
@@ -40,9 +55,19 @@ export const SCHEMA = yup.object().shape({
 
   // Ниша 2
   niche_name_2: yup.string().required("Обязательное поле"),
-  niche_description_2: yup.string().required("Обязательное поле"),
+  niche_description_2: yup
+    .string()
+    .required("Обязательное поле")
+    .test("is-not-empty", "Обязательное поле", (value) =>
+      hasEditorErrors(value)
+    ),
   activity_task_name_niche_2: yup.string().required("Обязательное поле"),
-  activity_task_description_niche_2: yup.string().required("Обязательное поле"),
+  activity_task_description_niche_2: yup
+    .string()
+    .required("Обязательное поле")
+    .test("is-not-empty", "Обязательное поле", (value) =>
+      hasEditorErrors(value)
+    ),
   activity_task_date_niche_2: yup.date().required("Обязательное поле"),
   activity_task_points_amount_niche_2: yup
     .number()
@@ -51,9 +76,19 @@ export const SCHEMA = yup.object().shape({
 
   // Ниша 3
   niche_name_3: yup.string().required("Обязательное поле"),
-  niche_description_3: yup.string().required("Обязательное поле"),
+  niche_description_3: yup
+    .string()
+    .required("Обязательное поле")
+    .test("is-not-empty", "Обязательное поле", (value) =>
+      hasEditorErrors(value)
+    ),
   activity_task_name_niche_3: yup.string().required("Обязательное поле"),
-  activity_task_description_niche_3: yup.string().required("Обязательное поле"),
+  activity_task_description_niche_3: yup
+    .string()
+    .required("Обязательное поле")
+    .test("is-not-empty", "Обязательное поле", (value) =>
+      hasEditorErrors(value)
+    ),
   activity_task_date_niche_3: yup.date().required("Обязательное поле"),
   activity_task_points_amount_niche_3: yup
     .number()

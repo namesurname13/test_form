@@ -1,4 +1,4 @@
-import { useForm, Controller, FieldErrors } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Title from "../Title";
 import NicheForm from "../NicheForm";
@@ -8,7 +8,7 @@ import { ActivityFormType, ResultDataType } from "../../utils/types";
 import { SCHEMA, TELEGRAM } from "../../utils/constants";
 import "./mainForm.css";
 import { useEffect } from "react";
-import { parseFormattedTextField } from "../../utils/tools";
+import { handleFocus, parseFormattedTextField } from "../../utils/tools";
 
 const MainForm = () => {
   const {
@@ -18,31 +18,11 @@ const MainForm = () => {
     formState: { errors },
   } = useForm<ActivityFormType>({
     resolver: yupResolver(SCHEMA),
+    shouldFocusError: false,
   });
-  console.log(errors);
 
   useEffect(() => {
-    const firstErrorKey = Object.keys(errors).find(
-      (key) => errors[key as keyof FieldErrors<ActivityFormType>]
-    );
-
-    if (firstErrorKey) {
-      (
-        document.querySelector(
-          `input[name="${firstErrorKey}"]`
-        ) as HTMLInputElement | null
-      )?.focus();
-    }
-  }, [errors]);
-  type ErrorsType = FieldErrors<ActivityFormType>;
-  useEffect(() => {
-    const firstErrorKey = Object.keys(errors).find(
-      (key) => errors[key as keyof ErrorsType]
-    ) as keyof ActivityFormType | undefined;
-
-    if (firstErrorKey) {
-      setFocus(firstErrorKey);
-    }
+    handleFocus(errors);
   }, [errors, setFocus]);
 
   const onSubmit = (data: any) => {
@@ -118,26 +98,26 @@ const MainForm = () => {
         },
       ],
     };
-    TELEGRAM.showPopup(
-      {
-        message: "Подтверди отправку формы",
-        buttons: [
-          {
-            id: "submit",
-            type: "default",
-            text: "Подтвердить",
-          },
-          {
-            id: "cancel",
-            type: "cancel",
-            text: "Отменить",
-          },
-        ],
-      },
-      (buttonId) => {
-        if (buttonId === "submit") console.log(finalData);
-      }
-    );
+    // TELEGRAM.showPopup(
+    //   {
+    //     message: "Подтверди отправку формы",
+    //     buttons: [
+    //       {
+    //         id: "submit",
+    //         type: "default",
+    //         text: "Подтвердить",
+    //       },
+    //       {
+    //         id: "cancel",
+    //         type: "cancel",
+    //         text: "Отменить",
+    //       },
+    //     ],
+    //   },
+    //   (buttonId) => {
+    //     if (buttonId === "submit") console.log(finalData);
+    //   }
+    // );
     console.log(finalData);
   };
 
@@ -179,7 +159,7 @@ const MainForm = () => {
         <ActivityTaskForm control={control} errors={errors} id={"3"} />
       </div>
       <div className="section">
-        <Title title="💵 Призовой фонд (в рублях)" />
+        <Title title="💵 Призовой фонд (в рублях)" size="sub" />
         <Controller
           name="reward"
           control={control}
@@ -199,7 +179,7 @@ const MainForm = () => {
             </div>
           )}
         />
-        <Title title="🏆 Количество призовых мест" />
+        <Title title="🏆 Количество призовых мест" size="sub" />
         <Controller
           name="prizes_number"
           control={control}
@@ -220,7 +200,7 @@ const MainForm = () => {
           )}
         />
       </div>
-      {/* <button type="submit">Отправить</button> */}
+      <button type="submit">Отправить</button>
     </form>
   );
 };
