@@ -133,13 +133,14 @@ const MainForm = () => {
           <NicheForm control={control} errors={errors} id={index} />
           <ActivityTaskForm control={control} errors={errors} id={index} />
           <Button
-            text="Remove Niche"
+            text="Удалить нишу"
             type="button"
             onClick={() => remove(index)}
           />
         </div>
       ))}
-      <button
+      <Button
+        text="Добавить нишу"
         type="button"
         onClick={() =>
           append(
@@ -150,16 +151,15 @@ const MainForm = () => {
               activity_task_date: null,
               activity_task_description: "",
               activity_task_name: "",
-              activity_task_points_amount: 0,
+              //@ts-ignore
+              activity_task_points_amount: "",
             },
             {
               focusName: "niches.0.niche_name",
             }
           )
         }
-      >
-        Add Niche
-      </button>
+      />
       <div className="section">
         <Title title="💵 Призовой фонд (в рублях)" size="sub" />
         <Controller
