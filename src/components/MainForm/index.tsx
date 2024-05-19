@@ -7,7 +7,7 @@ import ActivityTaskForm from "../ActivityTaskForm";
 import { ActivityFormType, ResultDataType } from "../../utils/types";
 import { SCHEMA, TELEGRAM } from "../../utils/constants";
 import "./mainForm.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { handleFocus, parseFormattedTextField } from "../../utils/tools";
 import Button from "../Button";
 
@@ -28,7 +28,7 @@ const MainForm = () => {
   }, [errors, setFocus]);
   const onSubmit = (data: any, e: any) => console.log("SUCCESS: ", data);
   const onError = (errors: any, e: any) => console.log("ERRORS: ", errors);
-
+  const [nichesCount, setNichesCount] = useState<number>(0);
   const onSubmits = (data: any) => {
     // const finalData: ResultDataType = {
     //   activity: {
@@ -142,7 +142,7 @@ const MainForm = () => {
       <Button
         text="Добавить нишу"
         type="button"
-        onClick={() =>
+        onClick={() => {
           append(
             {
               niche_name: "",
@@ -155,10 +155,11 @@ const MainForm = () => {
               activity_task_points_amount: "",
             },
             {
-              focusName: "niches.0.niche_name",
+              focusName: `niches.${nichesCount}.niche_name`,
             }
-          )
-        }
+          );
+          setNichesCount((state) => state++);
+        }}
       />
       <div className="section">
         <Title title="💵 Призовой фонд (в рублях)" size="sub" />
