@@ -123,6 +123,10 @@ const MainForm = () => {
     name: "niches",
   });
 
+  const removeNiche = (index: number) => {
+    remove(index);
+    setNichesCount((state) => state - 1);
+  };
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
       <div className="section">
@@ -135,7 +139,33 @@ const MainForm = () => {
           <Button
             text="Удалить нишу"
             type="button"
-            onClick={() => remove(index)}
+            onClick={() => {
+              TELEGRAM &&
+                TELEGRAM.showPopup(
+                  {
+                    message: "Подтверди удаление ниши",
+                    buttons: [
+                      {
+                        id: "submit",
+                        type: "default",
+                        text: "Подтвердить",
+                      },
+                      {
+                        id: "cancel",
+                        type: "cancel",
+                        text: "Отменить",
+                      },
+                    ],
+                  },
+                  (buttonId) => {
+                    if (buttonId === "submit") {
+                      remove(index);
+                      setNichesCount((state) => state - 1);
+                    }
+                  }
+                );
+              !TELEGRAM && removeNiche(index);
+            }}
           />
         </div>
       ))}
@@ -159,7 +189,6 @@ const MainForm = () => {
             }
           );
           setNichesCount((state) => state + 1);
-          console.log(nichesCount);
         }}
       />
       <div className="section">
