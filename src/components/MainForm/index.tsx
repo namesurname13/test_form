@@ -9,6 +9,7 @@ import { SCHEMA, TELEGRAM } from "../../utils/constants";
 import "./mainForm.css";
 import { useEffect } from "react";
 import { handleFocus, parseFormattedTextField } from "../../utils/tools";
+import Button from "../Button";
 
 const MainForm = () => {
   const {
@@ -131,23 +132,30 @@ const MainForm = () => {
         <div className="section" key={field.id}>
           <NicheForm control={control} errors={errors} id={index} />
           <ActivityTaskForm control={control} errors={errors} id={index} />
-          <button type="button" onClick={() => remove(index)}>
-            Remove Niche
-          </button>
+          <Button
+            text="Remove Niche"
+            type="button"
+            onClick={() => remove(index)}
+          />
         </div>
       ))}
       <button
         type="button"
         onClick={() =>
-          append({
-            niche_name: "",
-            niche_description: "",
-            //@ts-ignore
-            activity_task_date: null,
-            activity_task_description: "",
-            activity_task_name: "",
-            activity_task_points_amount: 0,
-          })
+          append(
+            {
+              niche_name: "",
+              niche_description: "",
+              //@ts-ignore
+              activity_task_date: null,
+              activity_task_description: "",
+              activity_task_name: "",
+              activity_task_points_amount: 0,
+            },
+            {
+              focusName: "niches.0.niche_name",
+            }
+          )
         }
       >
         Add Niche

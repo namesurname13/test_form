@@ -43,7 +43,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
 
   return (
     <div className="container">
-      <Title title={`📌 Задание ниши #${id}`} bold size="default" />
+      <Title title={`📌 Задание ниши #${id + 1}`} bold size="default" />
       <Title title="📝 Название задания" size="sub" />
       <Controller
         name={`niches.${id}.activity_task_name`}

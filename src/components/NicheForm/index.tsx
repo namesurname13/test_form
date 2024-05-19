@@ -7,7 +7,7 @@ import { NestedFormPropsType } from "../../utils/types";
 const NicheForm: React.FC<NestedFormPropsType> = ({ control, errors, id }) => {
   return (
     <div className="container">
-      <Title title={`📌 Ниша #${id}`} bold size="default" />
+      <Title title={`📌 Ниша #${id + 1}`} bold size="default" />
       <Title title="📝 Название ниши" size="sub" />
       <Controller
         name={`niches.${id}.niche_name`}
