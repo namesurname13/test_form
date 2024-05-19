@@ -16,6 +16,29 @@ export const FORMAT_OPTIONS = {
 export const EMOJI_REGEX =
   /(?:\p{Emoji}|\p{Emoji_Presentation}|\p{Extended_Pictographic}){1}/gu;
 
+const nicheSchema = yup.object().shape({
+  niche_name: yup.string().required("Обязательное поле"),
+  niche_description: yup
+    .string()
+    .required("Обязательное поле")
+    .test("is-not-empty", "Обязательное поле", (value) =>
+      hasEditorErrors(value)
+    ),
+  activity_task_name: yup.string().required("Обязательное поле"),
+  activity_task_description: yup
+    .string()
+    .required("Обязательное поле")
+    .test("is-not-empty", "Обязательное поле", (value) =>
+      hasEditorErrors(value)
+    ),
+  activity_task_date: yup.date().required("Обязательное поле"),
+  activity_task_points_amount: yup
+    .number()
+    .typeError("Должно быть числом")
+    .required("Обязательное поле")
+    .min(1, "Число должно быть больше 0"),
+});
+
 //Схема валидации
 export const SCHEMA = yup.object().shape({
   // Активность
@@ -32,71 +55,8 @@ export const SCHEMA = yup.object().shape({
       hasEditorErrors(value)
     ),
 
-  // Ниша 1
-  niche_name_1: yup.string().required("Обязательное поле"),
-  niche_description_1: yup
-    .string()
-    .required("Обязательное поле")
-    .test("is-not-empty", "Обязательное поле", (value) =>
-      hasEditorErrors(value)
-    ),
-  activity_task_name_niche_1: yup.string().required("Обязательное поле"),
-  activity_task_description_niche_1: yup
-    .string()
-    .required("Обязательное поле")
-    .test("is-not-empty", "Обязательное поле", (value) =>
-      hasEditorErrors(value)
-    ),
-  activity_task_date_niche_1: yup.date().required("Обязательное поле"),
-  activity_task_points_amount_niche_1: yup
-    .number()
-    .typeError("Должно быть числом")
-    .required("Обязательное поле")
-    .min(1, "Число должно быть больше 0"),
-
-  // Ниша 2
-  niche_name_2: yup.string().required("Обязательное поле"),
-  niche_description_2: yup
-    .string()
-    .required("Обязательное поле")
-    .test("is-not-empty", "Обязательное поле", (value) =>
-      hasEditorErrors(value)
-    ),
-  activity_task_name_niche_2: yup.string().required("Обязательное поле"),
-  activity_task_description_niche_2: yup
-    .string()
-    .required("Обязательное поле")
-    .test("is-not-empty", "Обязательное поле", (value) =>
-      hasEditorErrors(value)
-    ),
-  activity_task_date_niche_2: yup.date().required("Обязательное поле"),
-  activity_task_points_amount_niche_2: yup
-    .number()
-    .typeError("Должно быть числом")
-    .required("Обязательное поле")
-    .min(1, "Число должно быть больше 0"),
-
-  // Ниша 3
-  niche_name_3: yup.string().required("Обязательное поле"),
-  niche_description_3: yup
-    .string()
-    .required("Обязательное поле")
-    .test("is-not-empty", "Обязательное поле", (value) =>
-      hasEditorErrors(value)
-    ),
-  activity_task_name_niche_3: yup.string().required("Обязательное поле"),
-  activity_task_description_niche_3: yup
-    .string()
-    .required("Обязательное поле")
-    .test("is-not-empty", "Обязательное поле", (value) =>
-      hasEditorErrors(value)
-    ),
-  activity_task_date_niche_3: yup.date().required("Обязательное поле"),
-  activity_task_points_amount_niche_3: yup
-    .number()
-    .typeError("Должно быть числом")
-    .required("Обязательное поле")
-    .min(1, "Число должно быть больше 0"),
+  // Ниши
+  niches: yup.array().of(nicheSchema).min(1, "Должна быть хотя бы одна ниша"),
 
   // Призы
   reward: yup

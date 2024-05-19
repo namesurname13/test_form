@@ -18,12 +18,6 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
   errors,
   id,
 }) => {
-  const activityTaskNameKey = `activity_task_name_niche_${id}` as const;
-  const activityTaskDescriptionKey =
-    `activity_task_description_niche_${id}` as const;
-  const activityTaskDateKey = `activity_task_date_niche_${id}` as const;
-  const activityPointsKey = `activity_task_points_amount_niche_${id}` as const;
-  //@ts-ignore
   const DatepickerCustomInput = forwardRef<
     HTMLButtonElement,
     DatepickerCustomInputProps
@@ -52,7 +46,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
       <Title title={`📌 Задание ниши #${id}`} bold size="default" />
       <Title title="📝 Название задания" size="sub" />
       <Controller
-        name={`activity_task_name_niche_${id}`}
+        name={`niches.${id}.activity_task_name`}
         control={control}
         defaultValue=""
         render={({ field }) => (
@@ -63,8 +57,10 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
               {...field}
               placeholder="Название задания"
             />
-            {errors[activityTaskNameKey] ? (
-              <p className="error">{errors[activityTaskNameKey]?.message}</p>
+            {errors.niches?.[id]?.activity_task_name ? (
+              <p className="error">
+                {errors.niches?.[id]?.activity_task_name?.message}
+              </p>
             ) : (
               <p className="error"></p>
             )}
@@ -73,7 +69,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
       />
       <Title title="📝 Описание задания" size="sub" />
       <Controller
-        name={`activity_task_description_niche_${id}`}
+        name={`niches.${id}.activity_task_description`}
         control={control}
         defaultValue=""
         render={({ field }) => (
@@ -84,9 +80,9 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
               errors={errors}
               name={`activity_task_description_niche_${id}`}
             />
-            {errors[activityTaskDescriptionKey] ? (
+            {errors.niches?.[id]?.activity_task_description ? (
               <p className="error">
-                {errors[activityTaskDescriptionKey]?.message}
+                {errors.niches?.[id]?.activity_task_description?.message}
               </p>
             ) : (
               <p className="error"></p>
@@ -96,7 +92,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
       />
       <Title title="📅 Дедлайн задания" size="sub" />
       <Controller
-        name={`activity_task_date_niche_${id}`}
+        name={`niches.${id}.activity_task_date`}
         control={control}
         render={({ field }) => (
           <div className="form-input_container">
@@ -120,8 +116,10 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
               onCalendarOpen={() => setIsDatePickerOpen(true)}
               onCalendarClose={() => setIsDatePickerOpen(false)}
             />
-            {errors[activityTaskDateKey] ? (
-              <p className="error">{errors[activityTaskDateKey]?.message}</p>
+            {errors.niches?.[id]?.activity_task_date ? (
+              <p className="error">
+                {errors.niches?.[id]?.activity_task_date?.message}
+              </p>
             ) : (
               <p className="error"></p>
             )}
@@ -130,7 +128,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
       />
       <Title title="🔰 Количество очков задания" size="sub" />
       <Controller
-        name={`activity_task_points_amount_niche_${id}`}
+        name={`niches.${id}.activity_task_points_amount`}
         control={control}
         render={({ field }) => (
           <div className="form-input_container">
@@ -140,8 +138,10 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
               {...field}
               placeholder="Количество очков"
             />
-            {errors[activityPointsKey] ? (
-              <p className="error">{errors[activityPointsKey]?.message}</p>
+            {errors.niches?.[id]?.activity_task_points_amount ? (
+              <p className="error">
+                {errors.niches?.[id]?.activity_task_points_amount?.message}
+              </p>
             ) : (
               <p className="error"></p>
             )}

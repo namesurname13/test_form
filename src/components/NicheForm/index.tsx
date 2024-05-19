@@ -5,15 +5,12 @@ import FormatTextArea from "../FormatTextArea";
 import { NestedFormPropsType } from "../../utils/types";
 
 const NicheForm: React.FC<NestedFormPropsType> = ({ control, errors, id }) => {
-  const nicheNameKey = `niche_name_${id}` as const;
-  const nicheDescriptionKey = `niche_description_${id}` as const;
-
   return (
     <div className="container">
       <Title title={`📌 Ниша #${id}`} bold size="default" />
       <Title title="📝 Название ниши" size="sub" />
       <Controller
-        name={`niche_name_${id}`}
+        name={`niches.${id}.niche_name`}
         control={control}
         defaultValue=""
         render={({ field }) => (
@@ -24,8 +21,10 @@ const NicheForm: React.FC<NestedFormPropsType> = ({ control, errors, id }) => {
               {...field}
               placeholder="Название ниши"
             />
-            {errors[nicheNameKey] ? (
-              <p className="error">{errors[nicheNameKey]?.message}</p>
+            {errors.niches?.[id]?.niche_name ? (
+              <p className="error">
+                {errors.niches?.[id]?.niche_name?.message}
+              </p>
             ) : (
               <p className="error"></p>
             )}
@@ -34,7 +33,7 @@ const NicheForm: React.FC<NestedFormPropsType> = ({ control, errors, id }) => {
       />
       <Title title="📝 Описание ниши" size="sub" />
       <Controller
-        name={`niche_description_${id}`}
+        name={`niches.${id}.niche_description`}
         control={control}
         defaultValue=""
         render={({ field }) => (
@@ -45,8 +44,10 @@ const NicheForm: React.FC<NestedFormPropsType> = ({ control, errors, id }) => {
               errors={errors}
               name={`niche_description_${id}`}
             />
-            {errors[nicheDescriptionKey] ? (
-              <p className="error">{errors[nicheDescriptionKey]?.message}</p>
+            {errors.niches?.[id]?.niche_description ? (
+              <p className="error">
+                {errors.niches?.[id]?.niche_description?.message}
+              </p>
             ) : (
               <p className="error"></p>
             )}

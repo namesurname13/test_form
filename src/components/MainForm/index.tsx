@@ -1,4 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Title from "../Title";
 import NicheForm from "../NicheForm";
@@ -12,6 +12,7 @@ import { handleFocus, parseFormattedTextField } from "../../utils/tools";
 
 const MainForm = () => {
   const {
+    watch,
     setFocus,
     handleSubmit,
     control,
@@ -24,80 +25,56 @@ const MainForm = () => {
   useEffect(() => {
     handleFocus(errors);
   }, [errors, setFocus]);
+  const onSubmit = (data: any, e: any) => console.log("SUCCESS: ", data);
+  const onError = (errors: any, e: any) => console.log("ERRORS: ", errors);
 
-  const onSubmit = (data: any) => {
-    const {
-      main_activity_emoji,
-      main_activity_name,
-      main_activity_description,
-      niche_name_1,
-      niche_description_1,
-      niche_name_2,
-      niche_description_2,
-      niche_name_3,
-      niche_description_3,
-      activity_task_name_niche_1,
-      activity_task_description_niche_1,
-      activity_task_date_niche_1,
-      activity_task_points_amount_niche_1,
-      activity_task_name_niche_2,
-      activity_task_description_niche_2,
-      activity_task_date_niche_2,
-      activity_task_points_amount_niche_2,
-      activity_task_name_niche_3,
-      activity_task_description_niche_3,
-      activity_task_date_niche_3,
-      activity_task_points_amount_niche_3,
-      reward,
-      prizes_number,
-    } = data;
-
-    const finalData: ResultDataType = {
-      activity: {
-        name: `${main_activity_emoji} ${main_activity_name}`,
-        description: parseFormattedTextField(main_activity_description),
-        reward,
-        prizes_number,
-      },
-      niches: [
-        {
-          name: niche_name_1,
-          description: parseFormattedTextField(niche_description_1),
-          task: {
-            name: activity_task_name_niche_1,
-            description: parseFormattedTextField(
-              activity_task_description_niche_1
-            ),
-            expiration_date: activity_task_date_niche_1.toISOString(),
-            points: activity_task_points_amount_niche_1,
-          },
-        },
-        {
-          name: niche_name_2,
-          description: parseFormattedTextField(niche_description_2),
-          task: {
-            name: activity_task_name_niche_2,
-            description: parseFormattedTextField(
-              activity_task_description_niche_2
-            ),
-            expiration_date: activity_task_date_niche_2.toISOString(),
-            points: activity_task_points_amount_niche_2,
-          },
-        },
-        {
-          name: niche_name_3,
-          description: parseFormattedTextField(niche_description_3),
-          task: {
-            name: activity_task_name_niche_3,
-            description: parseFormattedTextField(
-              activity_task_description_niche_3
-            ),
-            expiration_date: activity_task_date_niche_3.toISOString(),
-            points: activity_task_points_amount_niche_3,
-          },
-        },
-      ],
-    };
+  const onSubmits = (data: any) => {
+    // const finalData: ResultDataType = {
+    //   activity: {
+    //     name: `${main_activity_emoji} ${main_activity_name}`,
+    //     description: parseFormattedTextField(main_activity_description),
+    //     reward,
+    //     prizes_number,
+    //   },
+    //   niches: [
+    //     {
+    //       name: niche_name_1,
+    //       description: parseFormattedTextField(niche_description_1),
+    //       task: {
+    //         name: activity_task_name_niche_1,
+    //         description: parseFormattedTextField(
+    //           activity_task_description_niche_1
+    //         ),
+    //         expiration_date: activity_task_date_niche_1.toISOString(),
+    //         points: activity_task_points_amount_niche_1,
+    //       },
+    //     },
+    //     {
+    //       name: niche_name_2,
+    //       description: parseFormattedTextField(niche_description_2),
+    //       task: {
+    //         name: activity_task_name_niche_2,
+    //         description: parseFormattedTextField(
+    //           activity_task_description_niche_2
+    //         ),
+    //         expiration_date: activity_task_date_niche_2.toISOString(),
+    //         points: activity_task_points_amount_niche_2,
+    //       },
+    //     },
+    //     {
+    //       name: niche_name_3,
+    //       description: parseFormattedTextField(niche_description_3),
+    //       task: {
+    //         name: activity_task_name_niche_3,
+    //         description: parseFormattedTextField(
+    //           activity_task_description_niche_3
+    //         ),
+    //         expiration_date: activity_task_date_niche_3.toISOString(),
+    //         points: activity_task_points_amount_niche_3,
+    //       },
+    //     },
+    //   ],
+    // };
     // TELEGRAM.showPopup(
     //   {
     //     message: "Подтверди отправку формы",
@@ -118,7 +95,7 @@ const MainForm = () => {
     //     if (buttonId === "submit") console.log(finalData);
     //   }
     // );
-    console.log(finalData);
+    console.log("SUBMIT");
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -140,24 +117,41 @@ const MainForm = () => {
       TELEGRAM.offEvent("mainButtonClicked", handledSubmit);
     };
   }, [handledSubmit]);
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "niches",
+  });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form">
+    <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
       <div className="section">
         <ActivityForm control={control} errors={errors} />
       </div>
-      <div className="section">
-        <NicheForm control={control} errors={errors} id={"1"} />
-        <ActivityTaskForm control={control} errors={errors} id={"1"} />
-      </div>{" "}
-      <div className="section">
-        <NicheForm control={control} errors={errors} id={"2"} />
-        <ActivityTaskForm control={control} errors={errors} id={"2"} />
-      </div>
-      <div className="section">
-        <NicheForm control={control} errors={errors} id={"3"} />
-        <ActivityTaskForm control={control} errors={errors} id={"3"} />
-      </div>
+      {fields.map((field, index) => (
+        <div className="section" key={field.id}>
+          <NicheForm control={control} errors={errors} id={index} />
+          <ActivityTaskForm control={control} errors={errors} id={index} />
+          <button type="button" onClick={() => remove(index)}>
+            Remove Niche
+          </button>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={() =>
+          append({
+            niche_name: "",
+            niche_description: "",
+            //@ts-ignore
+            activity_task_date: null,
+            activity_task_description: "",
+            activity_task_name: "",
+            activity_task_points_amount: 0,
+          })
+        }
+      >
+        Add Niche
+      </button>
       <div className="section">
         <Title title="💵 Призовой фонд (в рублях)" size="sub" />
         <Controller
@@ -200,7 +194,9 @@ const MainForm = () => {
           )}
         />
       </div>
-      <button type="submit">Отправить</button>
+      <button type="submit" onClick={() => console.log(watch())}>
+        Отправить
+      </button>
     </form>
   );
 };
