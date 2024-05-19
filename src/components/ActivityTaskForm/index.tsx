@@ -27,30 +27,24 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
   const DatepickerCustomInput = forwardRef<
     HTMLButtonElement,
     DatepickerCustomInputProps
-  >(
-    //@ts-ignore
-    ({ customName, value, onClick, isOpen }, ref) => {
-      console.log(customName);
-
-      //@ts-ignore
-      return (
-        <button
-          name={customName}
-          className={`form-input ${isOpen ? "datepicker-open" : ""}`}
-          onClick={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            TELEGRAM.HapticFeedback.impactOccurred("light");
-            onClick(event);
-          }}
-          //@ts-ignore
-          ref={ref}
-        >
-          {value}
-        </button>
-      );
-    }
-  );
+  >(({ customName, value, onClick, isOpen }, ref) => {
+    return (
+      <button
+        name={customName}
+        className={`form-input ${isOpen ? "datepicker-open" : ""}`}
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          TELEGRAM.HapticFeedback.impactOccurred("light");
+          onClick(event);
+        }}
+        ref={ref}
+      >
+        {value && <p>{value}</p>}
+        {!value && <p className="hint">Выбери дату</p>}
+      </button>
+    );
+  });
   const [isDatePickerOpen, setIsDatePickerOpen] = useState<boolean>(false);
 
   return (
