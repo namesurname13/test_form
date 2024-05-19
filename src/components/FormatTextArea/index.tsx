@@ -80,7 +80,7 @@ const FormatTextArea: React.FC<FormatTextAreaProps> = ({
   };
 
   return (
-    <div>
+    <div className="text-area_container">
       <div className="buttons">
         <div className="buttons_row">
           <FormatButton icon={<BoldSVG />} func={() => toggleStyle("BOLD")} />

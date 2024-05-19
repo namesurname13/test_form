@@ -22,12 +22,15 @@ div.public-DraftEditor-content {
   align-items: flex-start;
 }
 .buttons {
+  margin: 0 10px;
+  padding: 10px 0;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
+  border-bottom: 1px solid var(--tg-theme-subtitle-text-color, gray);
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .buttons_row {
   display: flex;
@@ -45,4 +48,10 @@ div.public-DraftEditor-content {
 .withoutBorder {
   border-radius: 18px;
   border: 2px solid rgba(0, 0, 0, 0);
+}
+.text-area_container {
+  border-radius: 18px;
+  width: 100%;
+  background: var(--tg-theme-secondary-bg-color, #fbfbfb);
+  color: var(--tg-theme-text-color, #000);
 }

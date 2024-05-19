@@ -51,7 +51,8 @@ export const SCHEMA = yup.object().shape({
   activity_task_points_amount_niche_1: yup
     .number()
     .typeError("Должно быть числом")
-    .required("Обязательное поле"),
+    .required("Обязательное поле")
+    .min(1, "Число должно быть больше 0"),
 
   // Ниша 2
   niche_name_2: yup.string().required("Обязательное поле"),
@@ -72,7 +73,8 @@ export const SCHEMA = yup.object().shape({
   activity_task_points_amount_niche_2: yup
     .number()
     .typeError("Должно быть числом")
-    .required("Обязательное поле"),
+    .required("Обязательное поле")
+    .min(1, "Число должно быть больше 0"),
 
   // Ниша 3
   niche_name_3: yup.string().required("Обязательное поле"),
@@ -93,15 +95,18 @@ export const SCHEMA = yup.object().shape({
   activity_task_points_amount_niche_3: yup
     .number()
     .typeError("Должно быть числом")
-    .required("Обязательное поле"),
+    .required("Обязательное поле")
+    .min(1, "Число должно быть больше 0"),
 
   // Призы
   reward: yup
     .number()
     .typeError("Должно быть числом")
-    .required("Обязательное поле"),
+    .required("Обязательное поле")
+    .min(1, "Число должно быть больше 0"),
   prizes_number: yup
     .number()
     .typeError("Должно быть числом")
-    .required("Обязательное поле"),
+    .required("Обязательное поле")
+    .min(1, "Число должно быть больше 0"),
 });
