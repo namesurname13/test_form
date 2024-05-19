@@ -158,7 +158,8 @@ const MainForm = () => {
               focusName: `niches.${nichesCount}.niche_name`,
             }
           );
-          setNichesCount((state) => state++);
+          setNichesCount((state) => state + 1);
+          console.log(nichesCount);
         }}
       />
       <div className="section">
