@@ -58,8 +58,8 @@
 }
 .section {
   background: var(--tg-theme-section-bg-color, #ababab);
-  padding: 10px 0 20px 0;
-  border-bottom: 1px solid var(--tg-theme-subtitle-text-color, gray);
+  border-radius: 18px;
+  padding: 20px 20px 10px 20px;
 }
 .section:last-child {
   border-bottom: none;
