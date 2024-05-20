@@ -104,6 +104,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
               timeFormat="HH:mm"
               timeIntervals={15}
               dateFormat="dd/MM/yyyy HH:mm"
+              calendarStartDay={1}
               customInput={
                 <DatepickerCustomInput
                   isOpen={isDatePickerOpen}
