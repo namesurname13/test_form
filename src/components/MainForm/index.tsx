@@ -93,7 +93,10 @@ const MainForm = () => {
         ],
       },
       (buttonId) => {
-        if (buttonId === "submit") console.log(finalData);
+        if (buttonId === "submit") {
+          TELEGRAM.showAlert("Форма успешно отправлена!");
+          console.log(finalData);
+        }
       }
     );
   };

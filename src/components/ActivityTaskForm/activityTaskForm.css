@@ -9,6 +9,15 @@
   width: 100%;
 }
 
+.react-datepicker {
+  background-color: var(--tg-theme-second-bg-color, #fbfbfb) !important;
+}
+.react-datepicker__header {
+  background-color: var(--tg-theme-second-bg-color, #fbfbfb) !important;
+}
+.react-datepicker__time {
+  background-color: var(--tg-theme-second-bg-color, #fbfbfb) !important;
+}
 input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
