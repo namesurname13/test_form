@@ -1,7 +1,7 @@
 import { RawDraftContentState, convertFromRaw } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import { FORMAT_OPTIONS } from "./constants";
-import { ActivityFormType, NicheFormType } from "./types";
+import { ActivityFormType } from "./types";
 import { FieldErrors } from "react-hook-form";
 
 // Функция для подсчета эмоджи в строке
@@ -53,11 +53,8 @@ export const handleFocus = (errors: FieldErrors<ActivityFormType>) => {
   }
   if (firstErrorKey === "niches" && Array.isArray(errors.niches)) {
     if (errors.niches) {
-      console.log(errors.niches);
-      //@ts-ignore
       for (let i = 0; i < errors.niches.length; i++) {
         if (errors.niches[i]) {
-          console.log(errors.niches[i]);
           const firstElementKey = Object.keys(errors.niches[i])[0];
           const element = document.querySelector(
             `[name="niches.${i}.${firstElementKey}"]`

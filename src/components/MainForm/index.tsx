@@ -13,7 +13,6 @@ import Button from "../Button";
 
 const MainForm = () => {
   const {
-    watch,
     setFocus,
     handleSubmit,
     control,
@@ -97,7 +96,6 @@ const MainForm = () => {
         if (buttonId === "submit") console.log(finalData);
       }
     );
-    console.log("SUBMIT: ", finalData);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -125,127 +123,126 @@ const MainForm = () => {
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
-      <div className="section">
-        <ActivityForm control={control} errors={errors} />
-      </div>
-      <div className="section">
-        <Title title="💵 Призовой фонд (в рублях)" size="sub" />
-        <Controller
-          name="reward"
-          control={control}
-          render={({ field }) => (
-            <div className="form-input_container">
-              <input
-                className="form-input"
-                type="number"
-                {...field}
-                placeholder="Награда (в рублях)"
-              />
-              {errors.reward ? (
-                <p className="error">{errors.reward?.message}</p>
-              ) : (
-                <p className="error"></p>
-              )}
-            </div>
-          )}
-        />
-        <Title title="🏆 Количество призовых мест" size="sub" />
-        <Controller
-          name="prizes_number"
-          control={control}
-          render={({ field }) => (
-            <div className="form-input_container">
-              <input
-                className="form-input"
-                type="number"
-                {...field}
-                placeholder="Количество мест"
-              />
-              {errors.prizes_number ? (
-                <p className="error">{errors.prizes_number?.message}</p>
-              ) : (
-                <p className="error"></p>
-              )}
-            </div>
-          )}
-        />
-      </div>
-      {fields.map((field, index) => (
-        <div className="section" key={field.id}>
-          <NicheForm control={control} errors={errors} id={index} />
-          <ActivityTaskForm control={control} errors={errors} id={index} />
-          <Button
-            text="Удалить нишу"
-            type="button"
-            onClick={() => {
-              TELEGRAM && TELEGRAM.HapticFeedback.impactOccurred("light");
-              TELEGRAM &&
-                TELEGRAM.showPopup(
-                  {
-                    message: `Подтверди удаление ниши #${index + 1}`,
-                    buttons: [
-                      {
-                        id: "submit",
-                        type: "destructive",
-                        text: "Удалить",
-                      },
-                      {
-                        id: "cancel",
-                        type: "cancel",
-                        text: "Отменить",
-                      },
-                    ],
-                  },
-                  (buttonId) => {
-                    if (buttonId === "submit") removeNiche(index);
-                  }
-                );
-              !TELEGRAM && removeNiche(index);
-              removeNiche(index);
-            }}
+    <div>
+      <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
+        <div className="section">
+          <ActivityForm control={control} errors={errors} />
+        </div>
+        <div className="section">
+          <Title title="💵 Призовой фонд (в рублях)" size="sub" />
+          <Controller
+            name="reward"
+            control={control}
+            render={({ field }) => (
+              <div className="form-input_container">
+                <input
+                  className="form-input"
+                  type="number"
+                  {...field}
+                  placeholder="Награда (в рублях)"
+                />
+                {errors.reward ? (
+                  <p className="error">{errors.reward?.message}</p>
+                ) : (
+                  <p className="error"></p>
+                )}
+              </div>
+            )}
+          />
+          <Title title="🏆 Количество призовых мест" size="sub" />
+          <Controller
+            name="prizes_number"
+            control={control}
+            render={({ field }) => (
+              <div className="form-input_container">
+                <input
+                  className="form-input"
+                  type="number"
+                  {...field}
+                  placeholder="Количество мест"
+                />
+                {errors.prizes_number ? (
+                  <p className="error">{errors.prizes_number?.message}</p>
+                ) : (
+                  <p className="error"></p>
+                )}
+              </div>
+            )}
           />
         </div>
-      ))}
-      <div>
-        <Title
-          title={`⚙️ Количество ниш: ${fields.length}`}
-          bold
-          size="default"
+        {fields.map((field, index) => (
+          <div className="section" key={field.id}>
+            <NicheForm control={control} errors={errors} id={index} />
+            <ActivityTaskForm control={control} errors={errors} id={index} />
+            <Button
+              text="Удалить нишу"
+              type="button"
+              onClick={() => {
+                TELEGRAM && TELEGRAM.HapticFeedback.impactOccurred("light");
+                TELEGRAM &&
+                  TELEGRAM.showPopup(
+                    {
+                      message: `Подтверди удаление ниши #${index + 1}`,
+                      buttons: [
+                        {
+                          id: "submit",
+                          type: "destructive",
+                          text: "Удалить",
+                        },
+                        {
+                          id: "cancel",
+                          type: "cancel",
+                          text: "Отменить",
+                        },
+                      ],
+                    },
+                    (buttonId) => {
+                      if (buttonId === "submit") removeNiche(index);
+                    }
+                  );
+                !TELEGRAM && removeNiche(index);
+                removeNiche(index);
+              }}
+            />
+          </div>
+        ))}
+        <div>
+          <Title
+            title={`⚙️ Количество ниш: ${fields.length}`}
+            bold
+            size="default"
+          />
+          {errors.niches ? (
+            <p className="error">{errors.niches.message}</p>
+          ) : (
+            <p className="error"></p>
+          )}
+        </div>
+        <Button
+          text="Добавить нишу"
+          type="button"
+          onClick={() => {
+            TELEGRAM && TELEGRAM.HapticFeedback.impactOccurred("light");
+            append(
+              {
+                niche_name: "",
+                niche_description: "",
+                //@ts-ignore
+                activity_task_date: null,
+                activity_task_description: "",
+                activity_task_name: "",
+                //@ts-ignore
+                activity_task_points_amount: "",
+              },
+              {
+                focusName: `niches.${nichesCount}.niche_name`,
+              }
+            );
+            setNichesCount((state) => state + 1);
+          }}
         />
-        {errors.niches ? (
-          <p className="error">{errors.niches.message}</p>
-        ) : (
-          <p className="error"></p>
-        )}
-      </div>
-      <Button
-        text="Добавить нишу"
-        type="button"
-        onClick={() => {
-          TELEGRAM && TELEGRAM.HapticFeedback.impactOccurred("light");
-          append(
-            {
-              niche_name: "",
-              niche_description: "",
-              //@ts-ignore
-              activity_task_date: null,
-              activity_task_description: "",
-              activity_task_name: "",
-              //@ts-ignore
-              activity_task_points_amount: "",
-            },
-            {
-              focusName: `niches.${nichesCount}.niche_name`,
-            }
-          );
-          setNichesCount((state) => state + 1);
-        }}
-      />
-      <button type="submit" onClick={() => console.log(watch())}>
-        Отправить
-      </button>
-    </form>
+      </form>
+    </div>
   );
 };
 
