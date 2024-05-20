@@ -140,6 +140,7 @@ const MainForm = () => {
             text="Удалить нишу"
             type="button"
             onClick={() => {
+              TELEGRAM && TELEGRAM.HapticFeedback.impactOccurred("light");
               TELEGRAM &&
                 TELEGRAM.showPopup(
                   {
@@ -147,8 +148,8 @@ const MainForm = () => {
                     buttons: [
                       {
                         id: "submit",
-                        type: "default",
-                        text: "Подтвердить",
+                        type: "destructive",
+                        text: "Удалить",
                       },
                       {
                         id: "cancel",
@@ -158,10 +159,7 @@ const MainForm = () => {
                     ],
                   },
                   (buttonId) => {
-                    if (buttonId === "submit") {
-                      remove(index);
-                      setNichesCount((state) => state - 1);
-                    }
+                    if (buttonId === "submit") removeNiche(index);
                   }
                 );
               !TELEGRAM && removeNiche(index);
@@ -173,6 +171,7 @@ const MainForm = () => {
         text="Добавить нишу"
         type="button"
         onClick={() => {
+          TELEGRAM && TELEGRAM.HapticFeedback.impactOccurred("light");
           append(
             {
               niche_name: "",
