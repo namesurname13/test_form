@@ -7,7 +7,7 @@ import ActivityTaskForm from "../ActivityTaskForm";
 import { ActivityFormType, ResultDataType } from "../../utils/types";
 import { SCHEMA, TELEGRAM } from "../../utils/constants";
 import "./mainForm.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { handleFocus, parseFormattedTextField } from "../../utils/tools";
 import Button from "../Button";
 
@@ -29,6 +29,23 @@ const MainForm = () => {
   const onSubmit = (data: any, e: any) => console.log("SUCCESS: ", data);
   const onError = (errors: any, e: any) => console.log("ERRORS: ", errors);
   const [nichesCount, setNichesCount] = useState<number>(0);
+
+  const setFocusOnLastNiche = () => {
+    const lastNicheIndex = fields.length - 2;
+    if (lastNicheIndex >= 0) {
+      const lastNicheInput = document.querySelector(
+        `[name="niches.${lastNicheIndex}.niche_name"]`
+      ) as HTMLInputElement;
+      lastNicheInput?.focus();
+    }
+  };
+
+  const removeNiche = (index: number) => {
+    remove(index);
+    setNichesCount((state) => state - 1);
+    setTimeout(setFocusOnLastNiche, 0);
+  };
+
   const onSubmits = (data: any) => {
     // const finalData: ResultDataType = {
     //   activity: {
@@ -123,10 +140,6 @@ const MainForm = () => {
     name: "niches",
   });
 
-  const removeNiche = (index: number) => {
-    remove(index);
-    setNichesCount((state) => state - 1);
-  };
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} className="form">
       <div className="section">
@@ -140,30 +153,30 @@ const MainForm = () => {
             text="Удалить нишу"
             type="button"
             onClick={() => {
-              TELEGRAM && TELEGRAM.HapticFeedback.impactOccurred("light");
-              TELEGRAM &&
-                TELEGRAM.showPopup(
-                  {
-                    message: "Подтверди удаление ниши",
-                    buttons: [
-                      {
-                        id: "submit",
-                        type: "destructive",
-                        text: "Удалить",
-                      },
-                      {
-                        id: "cancel",
-                        type: "cancel",
-                        text: "Отменить",
-                      },
-                    ],
-                  },
-                  (buttonId) => {
-                    if (buttonId === "submit") removeNiche(index);
-                  }
-                );
-              !TELEGRAM && removeNiche(index);
-              setFocus(`niches.${nichesCount}.niche_name`);
+              // TELEGRAM && TELEGRAM.HapticFeedback.impactOccurred("light");
+              // TELEGRAM &&
+              //   TELEGRAM.showPopup(
+              //     {
+              //       message: "Подтверди удаление ниши",
+              //       buttons: [
+              //         {
+              //           id: "submit",
+              //           type: "destructive",
+              //           text: "Удалить",
+              //         },
+              //         {
+              //           id: "cancel",
+              //           type: "cancel",
+              //           text: "Отменить",
+              //         },
+              //       ],
+              //     },
+              //     (buttonId) => {
+              //       if (buttonId === "submit") removeNiche(index);
+              //     }
+              //   );
+              // !TELEGRAM && removeNiche(index);
+              removeNiche(index);
             }}
           />
         </div>
