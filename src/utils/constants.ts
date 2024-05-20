@@ -55,12 +55,6 @@ export const SCHEMA = yup.object().shape({
       hasEditorErrors(value)
     ),
 
-  // Ниши
-  niches: yup
-    .array()
-    .of(nicheSchema)
-    .min(1, "❗️ Должна быть хотя бы одна ниша"),
-
   // Призы
   reward: yup
     .number()
@@ -72,4 +66,10 @@ export const SCHEMA = yup.object().shape({
     .typeError("❗️ Должно быть числом")
     .required("❗️ Обязательное поле")
     .min(1, "❗️ Число должно быть больше 0"),
+
+  // Ниши
+  niches: yup
+    .array()
+    .of(nicheSchema)
+    .min(1, "❗️ Должна быть хотя бы одна ниша"),
 });
