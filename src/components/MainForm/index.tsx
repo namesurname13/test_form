@@ -163,6 +163,7 @@ const MainForm = () => {
                   }
                 );
               !TELEGRAM && removeNiche(index);
+              setFocus(`niches.${nichesCount}.niche_name`);
             }}
           />
         </div>
