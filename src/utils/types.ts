@@ -24,7 +24,7 @@ type TaskType = {
  * @property {string} description - описание ниши
  * @property {TaskType | Record<string, never>} task - задание, прикрепленное к нише (ниша может не иметь задания)
  */
-type NicheType = {
+export type NicheType = {
   name: string;
   description: string;
   task: TaskType | Record<string, never>;

@@ -5,6 +5,7 @@
   height: 36px;
   outline: none;
   border: none;
+  margin-top: 10px;
 }
 .default-button_text {
   font-weight: 600;
