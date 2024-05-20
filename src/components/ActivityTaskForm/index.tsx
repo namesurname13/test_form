@@ -7,6 +7,8 @@ import { NestedFormPropsType } from "../../utils/types";
 import "./activityTaskForm.css";
 import { forwardRef, useState } from "react";
 import { TELEGRAM } from "../../utils/constants";
+import ru from "date-fns/locale/ru";
+
 interface DatepickerCustomInputProps {
   value: string;
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -105,6 +107,9 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
               timeIntervals={15}
               dateFormat="dd/MM/yyyy HH:mm"
               calendarStartDay={1}
+              timeCaption="Время"
+              //@ts-ignore
+              locale={ru}
               customInput={
                 <DatepickerCustomInput
                   isOpen={isDatePickerOpen}
