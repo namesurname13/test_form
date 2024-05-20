@@ -153,29 +153,29 @@ const MainForm = () => {
             text="Удалить нишу"
             type="button"
             onClick={() => {
-              // TELEGRAM && TELEGRAM.HapticFeedback.impactOccurred("light");
-              // TELEGRAM &&
-              //   TELEGRAM.showPopup(
-              //     {
-              //       message: "Подтверди удаление ниши",
-              //       buttons: [
-              //         {
-              //           id: "submit",
-              //           type: "destructive",
-              //           text: "Удалить",
-              //         },
-              //         {
-              //           id: "cancel",
-              //           type: "cancel",
-              //           text: "Отменить",
-              //         },
-              //       ],
-              //     },
-              //     (buttonId) => {
-              //       if (buttonId === "submit") removeNiche(index);
-              //     }
-              //   );
-              // !TELEGRAM && removeNiche(index);
+              TELEGRAM && TELEGRAM.HapticFeedback.impactOccurred("light");
+              TELEGRAM &&
+                TELEGRAM.showPopup(
+                  {
+                    message: "Подтверди удаление ниши",
+                    buttons: [
+                      {
+                        id: "submit",
+                        type: "destructive",
+                        text: "Удалить",
+                      },
+                      {
+                        id: "cancel",
+                        type: "cancel",
+                        text: "Отменить",
+                      },
+                    ],
+                  },
+                  (buttonId) => {
+                    if (buttonId === "submit") removeNiche(index);
+                  }
+                );
+              !TELEGRAM && removeNiche(index);
               removeNiche(index);
             }}
           />
