@@ -10,13 +10,13 @@
 }
 
 .react-datepicker {
-  background-color: var(--tg-theme-second-bg-color, #fbfbfb) !important;
+  background-color: var(--tg-theme-secondary-bg-color, #fbfbfb) !important;
 }
 .react-datepicker__header {
-  background-color: var(--tg-theme-second-bg-color, #fbfbfb) !important;
+  background-color: var(--tg-theme-secondary-bg-color, #fbfbfb) !important;
 }
 .react-datepicker__time {
-  background-color: var(--tg-theme-second-bg-color, #fbfbfb) !important;
+  background-color: var(--tg-theme-secondary-bg-color, #fbfbfb) !important;
 }
 input[type="number"] {
   appearance: textfield;
