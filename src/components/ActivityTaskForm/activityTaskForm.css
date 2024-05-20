@@ -10,14 +10,42 @@
 }
 
 .react-datepicker {
+  color: var(--tg-theme-text-color, #000);
   background-color: var(--tg-theme-secondary-bg-color, #fbfbfb) !important;
 }
+
 .react-datepicker__header {
   background-color: var(--tg-theme-secondary-bg-color, #fbfbfb) !important;
 }
+
 .react-datepicker__time {
   background-color: var(--tg-theme-secondary-bg-color, #fbfbfb) !important;
 }
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  color: var(--tg-theme-text-color, #000) !important;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  color: var(--tg-theme-text-color, #000) !important;
+}
+
+.react-datepicker__day--disabled {
+  color: var(--tg-theme-hint-color, gray) !important;
+}
+
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__quarter-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+  background-color: var(--tg-theme-button-color, blue) !important;
+  color: var(--tg-theme-button-text-color, black) !important;
+}
+
 input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
