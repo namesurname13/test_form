@@ -78,7 +78,7 @@ const ActivityTaskForm: React.FC<NestedFormPropsType> = ({
               value={field.value}
               onChange={field.onChange}
               errors={errors}
-              name={`activity_task_description_niche_${id}`}
+              name={`niches.${id}.activity_task_description`}
             />
             {errors.niches?.[id]?.activity_task_description ? (
               <p className="error">

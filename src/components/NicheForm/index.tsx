@@ -42,7 +42,7 @@ const NicheForm: React.FC<NestedFormPropsType> = ({ control, errors, id }) => {
               value={field.value}
               onChange={field.onChange}
               errors={errors}
-              name={`niche_description_${id}`}
+              name={`niches.${id}.niche_description`}
             />
             {errors.niches?.[id]?.niche_description ? (
               <p className="error">

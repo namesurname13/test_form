@@ -33,7 +33,7 @@ const FormatTextArea: React.FC<FormatTextAreaProps> = ({
   withItalic = false,
   errors,
   name,
-}: any) => {
+}) => {
   const [editorState, setEditorState] = useState(
     value
       ? EditorState.createWithContent(convertFromRaw(JSON.parse(value)))
@@ -51,7 +51,14 @@ const FormatTextArea: React.FC<FormatTextAreaProps> = ({
 
   useEffect(() => {
     const element = handleFocus(errors);
-    if (element === name) focusEditor();
+    const nameArr = name.split(".");
+
+    if (nameArr.length === 3) {
+      if (`${nameArr[0]}.${nameArr[1]}.${element}` === name) focusEditor();
+    }
+    if (nameArr.length === 1) {
+      if (element === name) focusEditor();
+    }
   }, [errors, name]);
 
   useEffect(() => {
