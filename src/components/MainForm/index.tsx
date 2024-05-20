@@ -13,7 +13,6 @@ import Button from "../Button";
 
 const MainForm = () => {
   const {
-    watch,
     setFocus,
     handleSubmit,
     control,
@@ -97,7 +96,6 @@ const MainForm = () => {
         if (buttonId === "submit") console.log(finalData);
       }
     );
-    console.log("SUBMIT: ", finalData);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -242,9 +240,6 @@ const MainForm = () => {
           setNichesCount((state) => state + 1);
         }}
       />
-      <button type="submit" onClick={() => console.log(watch())}>
-        Отправить
-      </button>
     </form>
   );
 };
