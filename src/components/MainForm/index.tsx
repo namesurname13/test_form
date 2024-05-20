@@ -43,7 +43,7 @@ const MainForm = () => {
   const removeNiche = (index: number) => {
     remove(index);
     setNichesCount((state) => state - 1);
-    setTimeout(setFocusOnLastNiche, 0);
+    setTimeout(setFocusOnLastNiche, 1);
   };
 
   const onSubmits = (data: any) => {
