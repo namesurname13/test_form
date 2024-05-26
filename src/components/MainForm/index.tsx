@@ -93,10 +93,10 @@ const MainForm = () => {
           },
         ],
       },
-      (buttonId: string) => {
+      async (buttonId: string) => {
         if (buttonId === "submit") {
           try {
-            api.sendData(finalData);
+            await api.sendData(finalData);
             TELEGRAM.showAlert("Форма успешно отправлена!");
             console.log(finalData);
           } catch (e) {
@@ -250,9 +250,6 @@ const MainForm = () => {
             setNichesCount((state) => state + 1);
           }}
         />
-        <button type="submit" onClick={() => handledSubmit()}>
-          submit
-        </button>
       </form>
     </div>
   );
