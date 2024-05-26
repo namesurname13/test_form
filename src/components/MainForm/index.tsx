@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { handleFocus, parseFormattedTextField } from "../../utils/tools";
 import Button from "../Button";
 import * as api from "../../api";
+import { Datepicker } from "../Datepicker";
 
 const MainForm = () => {
   const {
@@ -52,6 +53,7 @@ const MainForm = () => {
       main_activity_description,
       reward,
       prizes_number,
+      activity_deadline,
     } = data;
     const finalData: ResultDataType = {
       activity: {
@@ -59,6 +61,7 @@ const MainForm = () => {
         description: parseFormattedTextField(main_activity_description),
         reward,
         prizes_number,
+        activity_deadline: activity_deadline.toISOString(),
       },
       niches:
         data.niches?.map((niche) => {
@@ -93,10 +96,10 @@ const MainForm = () => {
           },
         ],
       },
-      async (buttonId: string) => {
+      (buttonId: string) => {
         if (buttonId === "submit") {
           try {
-            await api.sendData(finalData);
+            api.sendData(finalData);
             TELEGRAM.showAlert("Форма успешно отправлена!");
           } catch (e) {
             TELEGRAM.showAlert("Ошибка отправки формы");
@@ -178,6 +181,18 @@ const MainForm = () => {
               </div>
             )}
           />
+          <Title title="📅 Дедлайн активности" size="sub" />
+          <Controller
+            name="activity_deadline"
+            control={control}
+            render={({ field }) => (
+              <Datepicker
+                onChange={field.onChange}
+                value={field.value}
+                name={field.name}
+              />
+            )}
+          />
         </div>
         {fields.map((field, index) => (
           <div className="section" key={field.id}>
@@ -250,6 +265,9 @@ const MainForm = () => {
             setNichesCount((state) => state + 1);
           }}
         />
+        <button type="submit" onClick={() => handledSubmit()}>
+          submit
+        </button>
       </form>
     </div>
   );
