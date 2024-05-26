@@ -7,7 +7,7 @@ export const api = axios.create({
 
 export const sendData = async (data: ResultDataType) => {
   try {
-    const response = await api.post(`/send_data`, data);
+    const response = await api.post(`/sendd_data`, data);
     return response.data;
   } catch (error) {
     // Обработка ошибки
