@@ -44,7 +44,7 @@ export const Datepicker: React.FC<any> = ({ value, onChange, name }) => {
       timeIntervals={15}
       dateFormat="dd/MM/yyyy HH:mm"
       calendarStartDay={1}
-      timeCaption="Time"
+      timeCaption="Время"
       //@ts-ignore
       locale={ru}
       customInput={
